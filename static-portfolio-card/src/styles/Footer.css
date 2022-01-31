@@ -1,0 +1,16 @@
+.footer-container {
+    height: 10%;
+    background-color: #161619;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.footer-container > * {
+    background-color: #918E9B;
+    width: 25px;
+    height: 25px;
+}

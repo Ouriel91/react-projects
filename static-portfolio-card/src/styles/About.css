@@ -1,0 +1,14 @@
+.about-container {
+    height: 15%;
+    padding: 0 50px;
+    color: #fff;
+    overflow-wrap: break-word;
+}
+
+.about-title {
+    font-weight: bold;
+}
+
+.about-description {
+    font-size: 12px;
+}

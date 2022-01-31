@@ -1,0 +1,10 @@
+.interests-container {
+    height: 10%;
+    padding: 0 50px;
+    color: #fff;
+    overflow-wrap: break-word;
+}
+
+.interests-description {
+    font-size: 12px;
+}
