@@ -1,0 +1,57 @@
+.card-container{
+    margin-top: 10px;
+    margin-left: 37px;
+}
+
+.image{
+    width: 176px;
+    height: 235px;
+    border-radius: 9px;
+}
+
+.image-container {
+    position: relative;
+}
+
+.sold-or-online {
+    position: absolute;
+    background-color: #fff;
+    width: 61px;
+    height: 20px;
+    top: 6px;
+    left: 6px;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.rate-container{
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    width: 14px;
+    height: 14px;
+}
+
+.text-rate, .description, .price {
+    margin-left: 2px;
+    font-size: 12px;
+    color: #222222;
+}
+
+.produts {
+    display: flex;
+    align-items: center;
+}
+
+.details-text {
+    margin-left: 2px;
+    font-size: 12px;
+    color: #918E9B;
+}
+
+.bold-text {
+    font-weight: bold;
+}

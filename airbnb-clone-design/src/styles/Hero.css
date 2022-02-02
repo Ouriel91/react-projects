@@ -1,0 +1,30 @@
+.hero {
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-grid {
+    margin-top: 16px;
+    width: 395px;
+    height: 212px;
+    align-self: center;
+}
+
+.title, .content {
+    padding-left: 36px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 36px;
+    margin-bottom: 26px;
+    color: #000000;
+}
+
+.content {
+    width: 320px;
+    height: 56px;
+    margin-top: 0;
+    font-weight: 300;
+    color: #222222;
+}
