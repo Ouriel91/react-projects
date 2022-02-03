@@ -1,0 +1,12 @@
+.App {
+  margin: 30px auto;
+  width: 550px;
+  height: 704px;
+  background-color: #fff;
+
+}
+
+.cards-container {
+  margin-top: 45px;
+  margin-left: 40px;
+}
