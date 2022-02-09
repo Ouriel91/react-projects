@@ -1,0 +1,33 @@
+.nav {
+    width: 550px;
+    height: 65px;
+    background-color: #672280;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    margin: 15px 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 26px;
+    width: 30px;
+}
+
+.title {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.info-container {
+    font-size: 12px;
+    font-weight: 500;
+}
