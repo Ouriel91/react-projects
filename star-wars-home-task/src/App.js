@@ -1,7 +1,7 @@
 import React , {useEffect, useState} from 'react';
 import Bar from './Bar'
 import './App.css';
-import Table from '../components/Table'
+import Table from './components/Table'
 
 function App() {
 
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <Table />
+      <Table />      
       <div style={{height: '40vh', display: 'flex', verticalAlign: 'top'}}>
         <Bar population={100} height={'50%'} planetName="bla"/>
         <Bar population={102} height={'20%'} planetName="bla"/>
