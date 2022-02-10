@@ -3,9 +3,16 @@
 }
 
 .comp-container {
-  margin-top:'50px'; 
   display: flex; 
   align-items: center; 
   justify-content: center;
+}
+
+.table-container {
+  margin-top: 30px; 
+}
+
+.bar-container {
+  margin-top: 100px;
 }
 
