@@ -1,0 +1,12 @@
+.barcol-container{
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-end;
+}
+
+.barcol {
+    width: 10vw;
+    min-height: 20px;
+    margin: 15px;
+}

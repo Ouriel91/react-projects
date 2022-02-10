@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import BarCol from './BarCol'
+import '../styles/Bar.css'
 
 function Bar() {
 
@@ -7,7 +8,7 @@ function Bar() {
     const[largetPopulation, setLargetPopulation] = useState(0)
 
     const getFivePlanetsPopulationData = async() => {
-        const response = await fetch('https://swapi.py4e.com/api/planets/')
+        const response = await fetch('https://swapi.dev/api/planets')
         const planetsData = await response.json()
 
         getPlanetsDataAndMaxPopulation(planetsData)
@@ -40,7 +41,7 @@ function Bar() {
     },[])
 
     return (
-        <div style={{height: '40vh', display: 'flex'}}>
+        <div className="bar-container">
             {planetsPopulation.map(planet => 
                 <BarCol 
                     key={planet.name} 

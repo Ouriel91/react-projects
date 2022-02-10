@@ -8,7 +8,8 @@ function Table() {
     })
 
     const getHeighestSumPopulationData = async() => {
-        const responseVehicles = await fetch('https://swapi.py4e.com/api/vehicles/')
+        const responseVehicles = 
+          await fetch('https://swapi.dev/api/vehicles')
         const vehicles = await responseVehicles.json()
     
         const fliteredPilotsArr = 

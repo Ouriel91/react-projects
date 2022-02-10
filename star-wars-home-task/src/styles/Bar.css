@@ -1,0 +1,5 @@
+.bar-container {
+    min-width: 500px;
+    height: 40vh; 
+    display: flex;
+}

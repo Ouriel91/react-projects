@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/BarCol.css'
 
 function BarCol(props) {
 
@@ -6,14 +7,12 @@ function BarCol(props) {
         Math.floor(Math.random()*16777215).toString(16)
     
     return (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end'}}>
+        <div className="barcol-container">
             <span>{props.population}</span>
-            <div 
-                style={{width: '5vw', minHeight: '5px',
+            <div className="barcol"  
+                style={{
                 height:props.height, backgroundColor:`#${getRandomColor()}`,
-                margin: '15px',
-                alignSelf:'flex-start'}}>
-
+                }}>
             </div>
             <h3>{props.planetName}</h3>
         </div>
