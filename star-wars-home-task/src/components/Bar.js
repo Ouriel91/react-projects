@@ -5,34 +5,35 @@ import '../styles/Bar.css'
 function Bar() {
 
     const[planetsPopulation, setPlanetsPopulation] = useState([])
-    const[largetPopulation, setLargetPopulation] = useState(0)
 
     const getFivePlanetsPopulationData = async() => {
         const response = await fetch('https://swapi.dev/api/planets')
         const planetsData = await response.json()
 
-        getPlanetsDataAndMaxPopulation(planetsData)
+        getPlanetsDataAndCalculateBarColPlanet(planetsData)
     }
 
-    const getPlanetsDataAndMaxPopulation = (planetsData) => {    
+    const getPlanetsDataAndCalculateBarColPlanet = (planetsData) => {    
         const fiveStarsArr = ["Tatooine", "Alderaan", "Bespin", "Endor", "Naboo"]
         const retArr = []
 
-        let max = 0
         planetsData.results.forEach(planet => {
         if(fiveStarsArr.includes(planet.name)){
             retArr.push({
-            name:planet.name,
-            population: +planet.population
+                name:planet.name,
+                population: +planet.population
             })
-
-            if(+planet.population > max){
-            max = +planet.population
-            }
         }
         })
 
-        setLargetPopulation(max)
+        retArr.sort((a,b) => b.population - a.population)
+        let maxHeight = 200
+
+        for(let i = 0 ; i < retArr.length; i++){
+            retArr[i].height = maxHeight
+            maxHeight -= 40 
+        }
+
         setPlanetsPopulation(retArr)
     }
 
@@ -46,7 +47,7 @@ function Bar() {
                 <BarCol 
                     key={planet.name} 
                     population={planet.population} 
-                    height={`${Math.floor((planet.population/largetPopulation)*100)}%`} 
+                    height={planet.height}
                     planetName={planet.name}/>    
             )}
             

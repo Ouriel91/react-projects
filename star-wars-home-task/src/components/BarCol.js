@@ -11,7 +11,7 @@ function BarCol({height, planetName, population}) {
             <span>{population}</span>
             <div className="barcol"  
                 style={{
-                height:height, backgroundColor:`#${getRandomColor()}`,
+                height:`${height}px`, backgroundColor:`#${getRandomColor()}`,
                 }}>
             </div>
             <h3>{planetName}</h3>
