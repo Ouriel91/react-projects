@@ -14,27 +14,52 @@ function Bar() {
     }
 
     const getPlanetsDataAndCalculateBarColPlanet = (planetsData) => {    
-        const fiveStarsArr = ["Tatooine", "Alderaan", "Bespin", "Endor", "Naboo"]
-        const retArr = []
+        const fiveStarsArr = ["Tatooine", "Alderaan","Naboo", "Bespin", "Endor"]
+        let helperArr = []
+        let retArr = []
 
+        helperArr = setPlanetsData(fiveStarsArr, planetsData, helperArr)
+        helperArr = setBarColHeight(helperArr)   
+        retArr = setDataForBarPreformence(helperArr, retArr, fiveStarsArr)
+    
+        setPlanetsPopulation(retArr)
+    }
+
+    const setPlanetsData = (fiveStarsArr, planetsData, helperArr) => {
         planetsData.results.forEach(planet => {
-        if(fiveStarsArr.includes(planet.name)){
-            retArr.push({
-                name:planet.name,
-                population: +planet.population
-            })
-        }
+            if(fiveStarsArr.includes(planet.name)){
+                helperArr.push({
+                    name:planet.name,
+                    population: +planet.population
+                })
+            }
         })
 
-        retArr.sort((a,b) => b.population - a.population)
+        return helperArr
+    }
+
+    const setBarColHeight = (helperArr) => {
+        helperArr.sort((a,b) => b.population - a.population)
         let maxHeight = 200
 
-        for(let i = 0 ; i < retArr.length; i++){
-            retArr[i].height = maxHeight
+        for(let i = 0 ; i < helperArr.length; i++){
+            helperArr[i].height = maxHeight
             maxHeight -= 40 
         }
 
-        setPlanetsPopulation(retArr)
+        return helperArr
+    }
+
+    const setDataForBarPreformence = (helperArr, retArr, fiveStarsArr) => {
+        fiveStarsArr.forEach(star => {
+            helperArr.forEach(item => {
+                if(star.includes(item.name)){
+                    retArr.push(item)
+                }
+            })
+        })
+
+        return retArr
     }
 
     useEffect(() => {
