@@ -14,22 +14,11 @@ function Table() {
     
         const fliteredPilotsArr = 
           vehicles.results.filter(res => res.pilots.length > 0)
-    
-        for(let i = 0; i < fliteredPilotsArr.length; i++){
-            const pilotObj = fliteredPilotsArr[i];
-            pilotObj.population = 0 //initial for summarize all population in home planet's pilot
-    
-            for(let j = 0; j < pilotObj.pilots.length; j++){
-              const pilot = pilotObj.pilots[j];
-              const pilotDetails = await getPopulation(pilot);
-              pilotObj.population += pilotDetails.population //calculate population
-              pilotObj.pilots[j] = pilotDetails //update original pilots array, object instead link
-            }
-        } 
-    
-        const maxIndex = getMaxPopulationIndex(fliteredPilotsArr)
+
+        const handlePilotsArr = await vehiclesHandler(fliteredPilotsArr)
+        const maxIndex = getMaxPopulationIndex(handlePilotsArr)
       
-        setVehicle(fliteredPilotsArr[maxIndex])
+        setVehicle(handlePilotsArr[maxIndex])
       }
     
       const getPopulation = async(pilotUrl) => {
@@ -46,6 +35,23 @@ function Table() {
         }
       }
     
+      const vehiclesHandler = async(fliteredPilotsArr) => {
+          for(let i = 0; i < fliteredPilotsArr.length; i++){
+            const pilotObj = fliteredPilotsArr[i];
+            pilotObj.population = 0 //initial for summarize all population in home planet's pilot
+    
+            for(let j = 0; j < pilotObj.pilots.length; j++){
+              const pilot = pilotObj.pilots[j];
+              const pilotDetails = await getPopulation(pilot);
+              pilotObj.population += pilotDetails.population //calculate population
+              pilotObj.pilots[j] = pilotDetails //update original pilots array, object instead link
+            }
+        }
+
+        return fliteredPilotsArr
+      }
+
+
       const getMaxPopulationIndex = (fliteredPilotsArr) => {
         let maxIndex = 0
     
