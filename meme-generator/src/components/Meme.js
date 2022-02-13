@@ -26,20 +26,38 @@ function Meme() {
                 randomImage: url
             }))
     }
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setMeme(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
     
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
 
     return (
         <div className="meme-container">
-            <form className="meme-form">
+            <form className="meme-form" onSubmit={handleSubmit}>
                 <div className="input-container">
                     <input 
                         type="text" 
                         className="inputs" 
-                        placeholder="text above" />
+                        placeholder="text above"
+                        name="topText"
+                        onChange={handleChange}
+                        value={meme.topText} />
                     <input 
                         type="text" 
                         className="inputs" 
-                        placeholder="text below" />
+                        placeholder="text below"
+                        name="bottomText"
+                        onChange={handleChange}
+                        value={meme.bottomText} />
                 </div>
                 <button 
                     className="generate-button"
@@ -48,11 +66,14 @@ function Meme() {
                 </button>
             </form>
 
-            <img
-                className="meme-image" 
-                src={meme.randomImage} 
-                alt="meme-image" />
-
+            <div className="meme">
+                <img
+                    className="meme-image" 
+                    src={meme.randomImage} 
+                    alt="meme-frame" />
+                <h2 className="meme-text top-text">{meme.topText}</h2>
+                <h2 className="meme-text bottom-text">{meme.bottomText}</h2>
+            </div>
         </div>
     );
 }
