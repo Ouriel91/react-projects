@@ -1,13 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-*{
-    box-sizing: border-box;
+.App {
+    width: 550px;
+    height: 550px;
+    margin: 30px;
 }
-
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    height: 100vh;
-    background-color: #282D35;
-}
-
