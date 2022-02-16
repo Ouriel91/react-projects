@@ -1,0 +1,36 @@
+.board-container {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    height: 90%;
+    width: 90%;
+}
+
+.dices-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 40%;
+    padding: 20px;
+    grid-gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+.roll-refresh {
+    background-color: #5035FF;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 30px;
+}
+
+.roll-refresh:focus {
+    outline: none;
+}
+
+.roll-refresh:active {
+    transform:scale(0.98);
+}
