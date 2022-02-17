@@ -1,3 +1,10 @@
+.score-container {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .board-container {
     position: absolute;
     top: 25px;
@@ -18,25 +25,26 @@
     justify-items: center;
 }
 
-.roll-refresh {
-    background-color: #5035FF;
+.roll-rematch {
+background-color: #5035FF;
     color: #fff;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
+    margin: 20px;
     padding: 10px 30px;
 }
 
-.roll-refresh:focus {
+.roll-rematch:focus {
     outline: none;
 }
 
-.roll-refresh:active {
+.roll-rematch:active {
     box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
 
-.roll-refresh:hover {
+.roll-rematch:hover {
     background-color: rgba(91, 17, 139, 0.3);
     color: #000;
 }

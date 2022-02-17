@@ -26,16 +26,21 @@ function Main() {
 
   const [dices, setDices] = useState(() => generateDices())
   const [tenzies,setTenzies] = useState(false)
+  const [moves,setMoves] = useState(1)
+  const [highScore,setHighScore] = useState(
+    () => JSON.parse(localStorage.getItem('highScore')) || Number.MAX_SAFE_INTEGER
+  )
 
   const rollDices = () => {
 
     if(tenzies){
       setTenzies(false)
       setDices(prevState => prevState.map((dice, index) => generateNewDice(index)))
-
+      setMoves(1)
       return
     }
 
+    setMoves(prevState => prevState + 1)
     setDices(prevState => prevState.map((dice, index) => {
       return dice.isHeld ? 
         dice : 
@@ -68,6 +73,10 @@ function Main() {
 
     if(isAllHeld && isAllDicesHaveSameValue){
       setTenzies(true)
+
+      if(moves < localStorage.getItem('highScore')){
+        setHighScore(moves)
+      }
     }
   }
 
@@ -75,8 +84,16 @@ function Main() {
     winingCheck()
   },[dices])
 
+  useEffect (() => {
+    localStorage.setItem('highScore', highScore)
+  },[highScore])
+
   return (
     <div>
+      <div className="score-container">
+        <h3>Moves: {moves}</h3>
+        <h3>High Score: {highScore}</h3>
+      </div>      
       {tenzies && <Confetti />}
       <main className="board-container">
           <h1>Tenzies</h1>
@@ -84,7 +101,7 @@ function Main() {
           <div className="dices-container">
             {dicesGroup}        
           </div>
-          <button className="roll-refresh" onClick={rollDices}>{rollRematch}</button>
+          <button className="roll-rematch" onClick={rollDices}>{rollRematch}</button>
       </main>
     </div>
   )
