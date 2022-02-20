@@ -32,7 +32,6 @@
 .question {
     font-size: 16px;
     font-weight: bold;
-    color: #293264;
 }
 
 .ans-container {
@@ -53,6 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .answers:hover {
@@ -65,7 +65,24 @@
     font-weight: bold;
 }
 
+.held {
+    background-color: rgb(112, 197, 236, 0.8);
+}
+
+.button-and-score-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score {
+    margin-top: 15px;
+    font-size: 30px; 
+    font-weight: bold;
+}
+
 .check-answers-btn {
+    margin: 10px;
     color: #fff;
     font-weight: bold;
     font-size: 16px;

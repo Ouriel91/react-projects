@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react'
 import { useNavigate  } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import Emoji from "react-emoji-render";
 import '../styles/Questions.css'
 
 function Questions() {
 
     const [data, setData] = useState([])
+    const [score, setScore] = useState("")
 
     useEffect(() => {
         console.log("first") //prevent somehow from useEffect run twice
@@ -24,7 +26,13 @@ function Questions() {
 
             const index = results[i]
             let question_text = index.question
-            const question = question_text.replace(/&quot;/g, '"').replace(/&#039;/g, "'") //fix "" and ' problems
+            const question = question_text
+                .replace(/&quot;/g, '"')
+                .replace(/&#039;/g, "'")
+                .replace('&amp;', '&')
+                .replace(/&lt;/g,'<')
+                .replace(/&gt;/g,'>')
+                 //fix escape chars problems
             const incorrect_answers = index.incorrect_answers
             const allAnswersShuffle = []
             let correct_index = 0
@@ -40,12 +48,22 @@ function Questions() {
 
     const addAllAnswers = (index, allAnswers, incorrect_answers) => {
         let correctAnsText = index.correct_answer
-        const correctAns = correctAnsText.replace(/&quot;/g, '"').replace(/&#039;/g, "'")
+        const correctAns = correctAnsText
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'")
+            .replace('&amp;', '&')
+            .replace(/&lt;/g,'<')
+            .replace(/&gt;/g,'>')
         allAnswers.push(correctAns)
         
         for(let i = 0; i <incorrect_answers.length; i++){
             let inCorrectAnsText = incorrect_answers[i]
-            const inCorrectAns = inCorrectAnsText.replace(/&quot;/g, '"').replace(/&#039;/g, "'")
+            const inCorrectAns = inCorrectAnsText
+                .replace(/&quot;/g, '"')
+                .replace(/&#039;/g, "'")
+                .replace('&amp;', '&')
+                .replace(/&lt;/g,'<')
+                .replace(/&gt;/g,'>')
             allAnswers.push(inCorrectAns)
         }
     }
@@ -68,7 +86,8 @@ function Questions() {
             correct_ans: index.correct_answer,
             //default values
             isHeld: false,
-            selected_ans: 100
+            selected_ans: 100,
+            classNames: ["answers", "answers", "answers", "answers"]
         })
     }
 
@@ -78,22 +97,25 @@ function Questions() {
 
         let isHeld = false
         let selected = 100
+        let classNames = ["answers", "answers", "answers", "answers"]
 
         if(dataArr[item_ind].isHeld && dataArr[item_ind].selected_ans === ans_ind) {
             isHeld = false
             selected = 100
+            classNames = ["answers", "answers", "answers", "answers"]
         }
 
         if(dataArr[item_ind].selected_ans !== ans_ind) {
             isHeld = true;
             selected = ans_ind
+            classNames[selected] = "answers held"
         }
         
-
         let item = {
             ...dataArr[item_ind],
             isHeld : isHeld,
-            selected_ans: selected
+            selected_ans: selected,
+            classNames: classNames
         }
 
         dataArr[item_ind] = item
@@ -108,7 +130,7 @@ function Questions() {
                     {element.allAnswers.map((answer, ans_ind) => (
                         <div 
                             key={ans_ind} 
-                            className="answers" 
+                            className={element.classNames[ans_ind]}  
                             onClick={() => selectOrCancelSelectAns(item_ind, ans_ind)}>
                             <p className="answer">{answer}</p>
                         </div>
@@ -117,9 +139,46 @@ function Questions() {
             </div>
     ))
     
-    console.log(data)
+    const showScoreAndCorrectAnswers = () => {
+        let count = 0
+         
+        data.forEach((item) => {
+            if(item.correct_ans_id === item.selected_ans){
+                ++count
+            }
+        })
+
+        for(let i = 0; i < data.length; i++) {
+            let classNames = data[i].classNames
+            let cnArr = []
+
+            for(let j = 0; j < classNames.length; j++) {
+                let className = classNames[j]
+
+                if(j === data[i].correct_ans_id){
+                    className = "answers correct"
+                }
+                else if(j === data[i].selected_ans) {
+                    className = "answers incorrect"
+                }
+                else{
+                    className = "answers"
+                }
+
+                cnArr.push(className)
+            }
+
+            classNames = cnArr
+
+            console.log(cnArr)
+        }
+
+        setScore("correct answers: " + count + "/5")
+    }
 
     let navigate = useNavigate();
+
+    console.log(data)
 
     return (
         <div className="questions-container">
@@ -131,7 +190,16 @@ function Questions() {
                     {questionsAndAnswers}
                 </div>
 
-                <button className="check-answers-btn">Check Answers</button>
+                <div className="button-and-score-container">
+                    <div className="score">
+                        {score} 
+                    </div>
+                    <button 
+                        className="check-answers-btn"
+                        onClick={showScoreAndCorrectAnswers}>
+                        {score === "" ? "Check Answers" : "Rematch"}
+                    </button>
+                </div>
         </div>
     )
 }
