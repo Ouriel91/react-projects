@@ -75,12 +75,25 @@ function Questions() {
     const selectOrCancelSelectAns = (item_ind, ans_ind) => {
         
         let dataArr = [...data]
-        const isHeld = !dataArr[item_ind].isHeld
+
+        let isHeld = false
+        let selected = 100
+
+        if(dataArr[item_ind].isHeld && dataArr[item_ind].selected_ans === ans_ind) {
+            isHeld = false
+            selected = 100
+        }
+
+        if(dataArr[item_ind].selected_ans !== ans_ind) {
+            isHeld = true;
+            selected = ans_ind
+        }
+        
 
         let item = {
             ...dataArr[item_ind],
             isHeld : isHeld,
-            selected_ans: isHeld ? ans_ind : 100 //default value
+            selected_ans: selected
         }
 
         dataArr[item_ind] = item
