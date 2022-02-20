@@ -9,11 +9,15 @@ function Questions() {
 
     const [data, setData] = useState([])
     const [score, setScore] = useState("")
+    const [checkOrRematch, setCheckOrRematch] = useState(true)
 
     useEffect(() => {
         console.log("first") //prevent somehow from useEffect run twice
-        getData()
-    },[])
+        if(checkOrRematch){
+            getData()
+            setScore("")
+        }
+    },[checkOrRematch])
 
     const getData = async() => {
         const response = await fetch('https://opentdb.com/api.php?amount=5')
@@ -175,9 +179,9 @@ function Questions() {
             tempData[i] = item
         }
 
-
         setData(tempData)
         setScore("correct answers: " + count + "/5")
+        setCheckOrRematch(prevState => !prevState)
     }
 
     let navigate = useNavigate();

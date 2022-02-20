@@ -56,25 +56,25 @@
 }
 
 .answers:hover {
-    background-color: rgba(163, 156, 182, 0.8);
+    background-color: rgba(163, 156, 182, 0.3);
 }
 
 .answer {
     color: #293264;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
 }
 
 .held {
-    background-color: rgb(112, 197, 236, 0.8);
+    background-color: rgb(112, 197, 236, 0.4);
 }
 
 .correct {
-    background-color: rgb(143, 235, 121, 0.8);
+    background-color: rgb(143, 235, 121, 0.4);
 }
 
 .incorrect {
-    background-color: rgba(241, 113, 97, 0.8);
+    background-color: rgba(241, 113, 97, 0.4);
 }
 
 .button-and-score-container {
