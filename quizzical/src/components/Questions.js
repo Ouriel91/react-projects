@@ -148,31 +148,35 @@ function Questions() {
             }
         })
 
+        let tempData = [...data]
+
         for(let i = 0; i < data.length; i++) {
             let classNames = data[i].classNames
             let cnArr = []
 
             for(let j = 0; j < classNames.length; j++) {
-                let className = classNames[j]
-
+                
                 if(j === data[i].correct_ans_id){
-                    className = "answers correct"
+                    cnArr.push("answers correct")
                 }
                 else if(j === data[i].selected_ans) {
-                    className = "answers incorrect"
+                    cnArr.push("answers incorrect")
                 }
                 else{
-                    className = "answers"
+                    cnArr.push("answers")
                 }
-
-                cnArr.push(className)
             }
 
-            classNames = cnArr
+            let item = {
+                ...tempData[i],
+                classNames: cnArr
+            }
 
-            console.log(cnArr)
+            tempData[i] = item
         }
 
+
+        setData(tempData)
         setScore("correct answers: " + count + "/5")
     }
 
