@@ -1,0 +1,32 @@
+.container {
+    width: 550px;
+    height: 550px;
+    margin: 30px auto;
+    background-color: #F5F7FB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.start-game-btn {
+    width: 193px;
+    height: 52px;
+    background: #4D5B9E;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.start-game-btn:active {
+    transform: scale(0.98);
+}
+
+.start-game-btn:hover {
+    background-color: rgb(97, 90, 134);
+}
