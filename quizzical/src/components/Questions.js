@@ -88,12 +88,28 @@ function Questions() {
             question: question,
             allAnswers: allAnswersShuffle,
             correct_ans: index.correct_answer,
-            //default values
+            //default values for continue
             isHeld: false,
             selected_ans: 100,
             classNames: ["answers", "answers", "answers", "answers"]
         })
     }
+
+    const questionsAndAnswers = data.map((element, item_ind) => (
+        <div key={item_ind} className="ques-and-ans-unit">
+            <p className="question">{element.question}</p>
+            <div className="ans-container">
+                {element.allAnswers.map((answer, ans_ind) => (
+                    <div 
+                        key={ans_ind} 
+                        className={element.classNames[ans_ind]}  
+                        onClick={() => selectOrCancelSelectAns(item_ind, ans_ind)}>
+                        <p className="answer">{answer}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    ))
 
     const selectOrCancelSelectAns = (item_ind, ans_ind) => {
         
@@ -126,32 +142,32 @@ function Questions() {
 
         setData(dataArr)
     }
-
-    const questionsAndAnswers = data.map((element, item_ind) => (
-            <div key={item_ind} className="ques-and-ans-unit">
-                <p className="question">{element.question}</p>
-                <div className="ans-container">
-                    {element.allAnswers.map((answer, ans_ind) => (
-                        <div 
-                            key={ans_ind} 
-                            className={element.classNames[ans_ind]}  
-                            onClick={() => selectOrCancelSelectAns(item_ind, ans_ind)}>
-                            <p className="answer">{answer}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-    ))
     
     const showScoreAndCorrectAnswers = () => {
+
+        const count = calcScore()
+
+        const tempData = calcAnswers()
+        
+        setData(tempData)
+        setScore("correct answers: " + count + "/5")
+        setCheckOrRematch(prevState => !prevState)
+    }
+
+    const calcScore = () => {
+
         let count = 0
-         
+
         data.forEach((item) => {
             if(item.correct_ans_id === item.selected_ans){
                 ++count
             }
         })
 
+        return count
+    }
+
+    const calcAnswers = () => {
         let tempData = [...data]
 
         for(let i = 0; i < data.length; i++) {
@@ -179,9 +195,7 @@ function Questions() {
             tempData[i] = item
         }
 
-        setData(tempData)
-        setScore("correct answers: " + count + "/5")
-        setCheckOrRematch(prevState => !prevState)
+        return tempData
     }
 
     let navigate = useNavigate();

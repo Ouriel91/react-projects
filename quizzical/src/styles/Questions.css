@@ -84,7 +84,7 @@
     justify-content: center;
     position: absolute;
     width: 100%;
-    bottom: 10px;
+    bottom: -5px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -148,10 +148,6 @@
 
     .score {
         font-size: 16px;
-    }
-
-    .button-and-score-container {
-        bottom: -5px;
     }
 }
 
