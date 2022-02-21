@@ -8,14 +8,14 @@ import '../styles/Questions.css'
 function Questions() {
 
     const [data, setData] = useState([])
-    const [score, setScore] = useState("")
+    const [score, setScore] = useState(Number.MAX_SAFE_INTEGER)
     const [checkOrRematch, setCheckOrRematch] = useState(true)
 
     useEffect(() => {
         console.log("first") //prevent somehow from useEffect run twice
         if(checkOrRematch){
             getData()
-            setScore("")
+            setScore(Number.MAX_SAFE_INTEGER)
         }
     },[checkOrRematch])
 
@@ -150,7 +150,7 @@ function Questions() {
         const tempData = calcAnswers()
         
         setData(tempData)
-        setScore("correct answers: " + count + "/5")
+        setScore(count)
         setCheckOrRematch(prevState => !prevState)
     }
 
@@ -160,7 +160,7 @@ function Questions() {
 
         data.forEach((item) => {
             if(item.correct_ans_id === item.selected_ans){
-                ++count
+                count += 20
             }
         })
 
@@ -198,9 +198,18 @@ function Questions() {
         return tempData
     }
 
-    let navigate = useNavigate();
 
     console.log(data)
+
+    const showEmojie = () => {
+        const emojies = ["😥","😑","🙄","😏","😆","😎"]
+        const calc = score / 20
+
+        return score === 0 ? emojies[0] : emojies[calc]
+    }
+
+    let navigate = useNavigate();
+
 
     return (
         <div className="questions-container">
@@ -214,12 +223,15 @@ function Questions() {
 
                 <div className="button-and-score-container">
                     <div className="score">
-                        {score} 
+                        {score === Number.MAX_SAFE_INTEGER ? "" : ("Final score: " +score)} 
+                        {score === Number.MAX_SAFE_INTEGER 
+                            ? null : 
+                        <span role="img" aria-label="dog">{showEmojie()}</span>}
                     </div>
                     <button 
                         className="check-answers-btn"
                         onClick={showScoreAndCorrectAnswers}>
-                        {score === "" ? "Check Answers" : "Rematch"}
+                        {score === Number.MAX_SAFE_INTEGER ? "Check Answers" : "Rematch"}
                     </button>
                 </div>
         </div>
