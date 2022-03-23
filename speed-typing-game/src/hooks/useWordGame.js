@@ -1,27 +1,25 @@
 import  {useState, useEffect, useRef} from 'react'
 
-function useWordGame() {
-  
-    const START_TIME = 5
-    const END_TIME = 0
-    const INIT_COUNT_WORDS = 0
+function useWordGame(start_time = 60, 
+    end_time = 0, 
+    init_count_words = 0) { //used as default props (if not passed in App.js)
 
     const refTextArea = useRef(null)
 
     const [text, setText] = useState("")
-    const [countWords, setCountWords] = useState(INIT_COUNT_WORDS)
-    const [timeRemaining, setTimeRemaining] = useState(START_TIME)
+    const [countWords, setCountWords] = useState(init_count_words)
+    const [timeRemaining, setTimeRemaining] = useState(start_time)
     const [startGame, setStartGame] = useState(false)
 
 
     useEffect(() => {
-        if(startGame && timeRemaining > END_TIME){
+        if(startGame && timeRemaining > end_time){
         setTimeout(() => {
             setTimeRemaining(prevState => prevState - 1)
         },1000)
         }
 
-        if(timeRemaining === END_TIME){
+        if(timeRemaining === end_time){
         endGame()
         }
     }, [timeRemaining, startGame])
@@ -40,8 +38,8 @@ function useWordGame() {
 
     const playGame = () => {
         setStartGame(true)
-        setTimeRemaining(START_TIME)
-        setCountWords(INIT_COUNT_WORDS)
+        setTimeRemaining(start_time)
+        setCountWords(init_count_words)
         setText("")
         refTextArea.current.disabled = false
         refTextArea.current.focus()

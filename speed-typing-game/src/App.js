@@ -12,7 +12,7 @@ function App() {
         playGame,
         countWords
   } = useWordGame ()
-  
+
   return (
     <div className="App">
       <h1>How fast do you type?</h1>
